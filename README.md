@@ -6,7 +6,7 @@ gauche-install および gauche-config を使ってインストールします�
 ${GAUCHE}/share/gauche/site/lib にインストールする場合は、次のコマンド
 でインストールします。
 
-> gauche-install -T `gauche-config --sitelibdir` -m 644 dns/resolv.scm
+    gauche-install -T `gauche-config --sitelibdir` -m 644 dns/resolv.scm
 
 他のディレクトリにインストールしたい場合は、-T の引数にディレクトリを
 指定してください。
