@@ -1,4 +1,5 @@
-# このモジュールは Gauche 用の DNS resolver ライブラリになります。
+# gauche-dns-resolv
+このモジュールは Gauche 用の DNS resolver ライブラリです。
 
 ## インストール
 gauche-install および gauche-config を使ってインストールします。
