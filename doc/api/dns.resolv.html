@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>dns.resolv API</title>
+</head>
+<body>
+<h2>[Module] dns.resolv</h2>
+
+<h3>[class] &lt;resolver&gt;</h3>
+リゾルバに関する情報を持つクラスになります。
+
+<h4>[method] make <em>&lt;resolver&gt; &keyword server port protocol
+timeout retry</em></h4>
+resolver インスタンスを作成します。
+<br><br>
+キーワード引数によってリゾルバの設定を変えることが出来ます。
+<br>
+<dl>
+<dt>:server</dt>
+<dd>
+ネームサーバを指定します。文字列か、文字列リストを渡すことが出来ます。デ
+フォルトは、/etc/resolv.conf の nameserver の値になります。
+<pre>
+例： (make &lt;resolver&gt; :server "127.0.0.1")
+</pre>
+</dd>
+</dl>
+
+<dl>
+<dt>:port</dt>
+<dd>ネームサーバのポート番号を指定します。デフォルトは 53 になります。
+<pre>
+例： (make &lt;resolver&gt; :port 5353)
+</pre>
+</dd>
+</dl>
+
+<dl>
+<dt>:protocol</dt>
+<dd>ネームサーバへ問い合わせするプロトコルを指定します。このキーワードに
+    は 'udp もしくは 'tcp を渡すことが出来ます。デフォルトは UDP
+    になります。
+<pre>
+例： (make &lt;resolver&gt; :protocol 'tcp)
+</pre>
+</dd>
+</dl>
+
+<dl>
+<dt>:timeout</dt>
+<dd>ネームサーバへ問い合わせのタイムアウト時間を指定します。デフォルトは
+    5 になります。
+<pre>
+例： (make &lt;resolver&gt; :timeout 3)
+</pre>
+</dd>
+</dl>
+
+<dl>
+<dt>:retry</dt>
+<dd>ネームサーバへ問い合わせをリトライする回数を指定します。デフォルトは
+    2 になります。
+<pre>
+例： (make &lt;resolver&gt; :retry 3)
+</pre>
+</dd>
+</dl>
+
+<h3>[class] &lt;dns-message&gt;</h3>
+DNS サーバから返されるのメッセージクラスになります。
+
+<h4>[method] dns-message-id <em>dns-message</em></h4>
+DNS メッセージの ID を返します
+
+<h4>[method] dns-message-opcode <em>dns-message</em></h4>
+DNS メッセージの OPCODE を返します
+
+<h4>[method] dns-message-rcode <em>dns-message</em></h4>
+DNS メッセージの RCODE を返します
+
+<h4>[method] dns-message-authoritative-answer? <em>dns-message</em></h4>
+DNS メッセージが権威のあるネームサーバからの回答であるかを返します。
+
+<h4>[method] dns-message-truncation? <em>dns-message</em></h4>
+DNS メッセージが TC ビットが立っているかを返します。
+
+<h4>[method] dns-message-recursive-available? <em>dns-message</em></h4>
+問い合わせ先のネームサーバが再帰的問い合わせをサポートするかを返します。
+
+<h4>[method] dns-message-qdcount <em>dns-message</em></h4>
+question section のレコード数を返します。
+
+<h4>[method] dns-message-ancount <em>dns-message</em></h4>
+answer section のレコード数を返します。
+
+<h4>[method] dns-message-nscount <em>dns-message</em></h4>
+authority section のレコード数を返します。
+
+<h4>[method] dns-message-arcount <em>dns-message</em></h4>
+additional section のレコード数を返します。
+
+<h4>[method] dns-message-question-section <em>dns-message</em></h4>
+question section の内容をリストにして返します。
+
+<h4>[method] dns-message-answer-section <em>dns-message</em></h4>
+answer section の内容をリストにして返します。
+
+<h4>[method] dns-message-authority-section <em>dns-message</em></h4>
+authority section の内容をリストにして返します。
+
+<h4>[method] dns-message-additional-section <em>dns-message</em></h4>
+additional section の内容をリストにして返します。
+
+
+<h3>[class] &lt;resource-record&gt;</h3>
+すべてのリソースレコードの基底クラスです。
+
+<h4>[method] resource-record-name <em>resource-record</em></h4>
+RR の名前を返します。
+
+<h4>[method] resource-record-class <em>resource-record</em></h4>
+RR のクラス(整数)を返します。このメソッドは常に 1 を返します。
+
+<h4>[method] resource-record-type <em>resource-record</em></h4>
+RR の名前をタイプ(整数)を返します。
+
+<h4>[method] resource-record-ttl <em>resource-record</em></h4>
+RR の TTL を返します。
+
+
+<h3>[class] &lt;a-record&gt;</h3>
+A レコードに関する情報を持つクラスです。
+
+<h4>[method] a-record-address <em>a-record</em></h4>
+アドレスを返します。
+
+
+<h3>[class] &lt;ns-record&gt;</h3>
+NS レコードに関する情報を持つクラスです。
+
+<h4>[method] ns-record-nsdname <em>ns-record</em></h4>
+ネームサーバ名を返します。
+
+
+<h3>[class] &lt;soa-record&gt;</h3>
+SOA レコードに関する情報を持つクラスです。
+
+<h4>[method] soa-record-master-name <em>soa-record</em></h4>
+ゾーンのプライマリネームサーバ名を返します。
+
+<h4>[method] soa-record-rname <em>soa-record</em></h4>
+ゾーンの責任者名を返します。
+
+<h4>[method] soa-record-serial <em>soa-record</em></h4>
+ゾーンのシリアル番号を返します。
+
+<h4>[method] soa-record-refresh <em>soa-record</em></h4>
+ゾーンのリフレッシュ間隔を返します。
+
+<h4>[method] soa-record-retry <em>soa-record</em></h4>
+ゾーンのリフレッシュに失敗した後に、リトライするまでの間隔を返します。
+
+<h4>[method] soa-record-expire <em>soa-record</em></h4>
+ゾーンの有効期限を返します。
+
+<h4>[method] soa-record-minimum <em>soa-record</em></h4>
+ゾーンの最小 TTL を返します。
+
+
+<h3>[class] &lt;cname-record&gt;</h3>
+cname レコードに関する情報を持つクラスです。
+
+<h4>[method] cname-cname <em>cname-record</em></h4>
+別名を返します。
+
+
+<h3>[class] &lt;mx-record&gt;</h3>
+MX レコードに関する情報を持つクラスです。
+
+<h4>[method] mx-preference</h4>
+
+<h4>[method] mx-excahange</h4>
+
+<h3>[class] &lt;hinfo-record&gt;</h3>
+HINFO レコードに関する情報を持つクラスです。
+
+<h4>[method] hinfo-os</h4>
+
+<h4>[method] hinfo-cpu</h4>
+
+<h3>[condition] &lt;resolver-error&gt;</h3>
+リゾルバの例外クラスになります。dns.resolv に定義されているすべてのコン
+ディションクラスの基底クラスになります。
+
+<h3>[condition] &lt;dns-message-error&gt;</h3>
+DNS サーバから解釈できないメッセージが返って来たときに投げる例外になりま
+す。
+
+<h3>[condition] &lt;query-format-error&gt;</h3>
+問い合わせのフォーマットエラーが発生した場合(RCODE == 1)に投げる例外にな
+ります。
+
+<h3>[condition] &lt;server-failure-error&gt;</h3>
+問い合わせ先のネームサーバに問題が発生した場合(RCODE == 2)に投げる例外に
+なります。
+
+<h3>[condition] &lt;nxdomain-error&gt;</h3>
+名前が存在しない場合(RCODE == 3)に投げる例外になります。
+
+<h3>[condition] &lt;not-implemented-error&gt;</h3>
+問い合わせ先のネームサーバに実装していないリクエストを投げた場合(RCODE
+== 4)に投げる例外になります。
+
+<h3>[condition] &lt;other-resolver-error&gt;</h3>
+上記4つ以外の理由でエラーになった場合に投げる例外になります。
+
+<h3>[condition] &lt;resolver-io-error&gt;</h3>
+問い合わせ先のネームサーバとの通信エラーが発生した場合に投げる例外になり
+ます。
+
+<h3>[condition] &lt;resolver-timeout-error&gt;</h3>
+問い合わせがタイムアウトに場合に投げる例外になります。
+
+<h3>[function] resolv:name-&gt;address <em>resolver name</em></h3>
+DNS サーバへ<em>name</em>を問い合わせます。結果としてアドレス(文字列)の
+リストを返します。
+
+<h3>[function] resolv:address-&gt;name <em>resolver address</em></h3>
+DNS サーバへ<em>address</em>を逆引きします。結果としてホスト名(文字列)の
+リストを返します。
+
+<h3>[function] resolv:get-resource-records <em>resolver name
+ type</em></h3>
+名前とレコードタイプを指定して、DNSサーバへ問い合わせします。レコードタ
+イプはシンボルで指定するか、定数を使って指定します。
+
+<p>
+<center>
+<table border="1">
+<tr>
+<td>リソースレコード</td><td>シンボル</td><td>定数</td>
+</tr>
+<tr>
+<td>A レコード</td><td>A</td><td>RR:A</td>
+</tr>
+<tr>
+<td>SOA レコード</td><td>SOA</td><td>RR:SOA</td>
+</tr>
+<tr>
+<td>CNAME レコード</td><td>CNAME</td><td>RR:CNAME</td>
+</tr>
+<tr>
+<td>MX レコード</td><td>MX</td><td>RR:MX</td>
+</tr>
+<tr>
+<td>NS レコード</td><td>NS</td><td>RR:NS</td>
+</tr>
+<tr>
+<td>PTR レコード</td><td>PTR</td><td>RR:PTR</td>
+</tr>
+<tr>
+<td>HINFO レコード</td><td>HINFO</td><td>RR:HINFO</td>
+</tr>
+</table>
+</center>
+</p>
+
+この関数の結果として、DNS の ANSWER SECTION に含まれるリソースレコードの
+インスタンスのリストを返します。
+
+<h3>[function] resolv:get-dns-message <em>resolver name type</em></h3>
+名前とレコードタイプを指定して、DNSサーバへ問い合わせします。結果として、
+DNS のメッセージ(ヘッダ, QUESTION SECTION, ANSWER SECTION, AUTHORITY
+SECTION, ADDITIONAL SECTION)のインスタンスを返します。
+
+<h3>[function] call-with-message-body <em>resolver name type
+ proc</em></h3>
+名前とレコードタイプを指定して、DNSサーバへ問い合わせし、結果(QUESTION
+SECTION, ANSWER SECTION, AUTHORITY SECTION, ADDITIONAL SECTION)を
+<em>proc</em>に渡します。
+
+</body>
+</html>

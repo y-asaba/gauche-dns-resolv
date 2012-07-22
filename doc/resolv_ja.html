@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>dns.resolv</title>
+</head>
+<body>
+<h1>dns.resolv モジュールとは?</h1>
+DNS サーバへの問い合わせを実行するライブラリになります。libresolv などの
+外部のライブラリに依存せず、Gauche のみで記述されています。
+
+<h2>ライセンス</h2>
+BSD ライセンス
+
+<h2>インストール</h2>
+gauche-install と gauche-config を使ってインストールします。
+$GAUCHDIR/share/site/lib にインストールする場合は、次のコマンドでインス
+トールします。
+
+<pre>
+$ gauche-install -T `gauche-config --sitelibdir` -m 644 dns/resolv.scm
+</pre>
+
+他のディレクトリにインストールしたい場合は、-T の引数にインストールした
+いディレクトリを指定してください。
+
+<h2>使い方</h2>
+モジュールを使う場合は、use で宣言します。
+
+<pre>
+(use dns.resolv)
+</pre>
+
+<h2>API</h2>
+<a href="api/dns.resolv.html">dns.resolv モジュール</a>
+
+<h2>サンプルプログラム</h2>
+<ul>
+<li><a href="../example/name2address.scm">名前からアドレスを調べる</a>
+<li><a href="../example/address2name.scm">アドレスから名前を調べる</a>
+<li><a href="../example/check_mx.scm">MX レコードを調べる</a>
+</ul>
+
+<h2>TODO</h2>
+<ul>
+<li>対応リソースレコードを増やす
+<li>DNSSEC 対応
+<li>AXFR 対応
+<li>テスト
+<li>英語のドキュメント
+</ul>
+
+
+<h2>参考</h2>
+<ul>
+<li><a href="http://www.ietf.org/rfc/rfc1034.txt?number=1034">RFC1034</a>
+<li><a href="http://www.ietf.org/rfc/rfc1034.txt?number=1035">RFC1035</a>
+</ul>
+
+<h2>問い合わせ</h2>
+バグとか要望がありましたら、y-asaba _at_ sra.co.jp にメールください。な
+お、必ず反応できるとは保証はできません。
+
+</body>
+</html>
