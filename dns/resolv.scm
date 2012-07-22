@@ -1,7 +1,7 @@
 ;;;
 ;;; resolv.scm - resolver (see RFC 1034, 1035 and so on.)
 ;;;
-;;;   Copyright (c) 2005 Yoshiyuki Asaba, All rights reserved.
+;;;   Copyright (c) 2012 Yoshiyuki Asaba, All rights reserved.
 ;;; 
 ;;;   Redistribution and use in source and binary forms, with or without
 ;;;   modification, are permitted provided that the following conditions
